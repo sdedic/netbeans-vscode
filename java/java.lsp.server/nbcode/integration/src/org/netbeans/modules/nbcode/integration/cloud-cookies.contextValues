@@ -27,3 +27,4 @@ org.netbeans.modules.cloud.oracle.compute.ComputeInstanceItem
 org.netbeans.modules.cloud.oracle.bucket.BucketItem
 org.netbeans.modules.cloud.oracle.vault.VaultItem
 org.netbeans.modules.cloud.oracle.developer.ContainerRepositoryItem
+org.netbeans.modules.cloud.oracle.developer.ContainerTagItem
