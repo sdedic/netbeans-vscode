@@ -23,7 +23,7 @@
 [![Visual Studio Marketplace](https://img.shields.io/visual-studio-marketplace/v/ASF.apache-netbeans-java)](https://marketplace.visualstudio.com/items?itemName=ASF.apache-netbeans-java)
 [![Visual Studio Marketplace Installs](https://img.shields.io/visual-studio-marketplace/i/ASF.apache-netbeans-java)](https://marketplace.visualstudio.com/items?itemName=ASF.apache-netbeans-java)
 [![Build Status](https://ci-builds.apache.org/job/Netbeans/view/vscode/job/netbeans-vscode/badge/icon)](https://ci-builds.apache.org/job/Netbeans/view/vscode/job/netbeans-vscode/)
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/apache/netbeans/blob/master/LICENSE)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/apache/netbeans-vscode/blob/master/LICENSE)
 
 
 This is [Apache NetBeans](http://netbeans.org) Language Server extension for VS Code. Use it to get all the _goodies of NetBeans_ via the VS Code user interface! Runs on __JDK11__ and all newer versions.
