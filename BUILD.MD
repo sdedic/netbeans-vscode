@@ -155,8 +155,8 @@ So that the vscode can connect to the _standalone NBLS_ instance.
 
 ### NBLS userdir locations
 The default userdir location is inside the **global** vscode settings location:
-- on Linux: `~/.config/Code/User/globalStorage//asf.apache-netbeans-java/userdir
-- on MacOS X: ~/Library/Application Support/Code/User/globalStorage//asf.apache-netbeans-java/userdir
+- on Linux: `~/.config/Code/User/globalStorage/asf.apache-netbeans-java/userdir
+- on MacOS X: ~/Library/Application Support/Code/User/globalStorage/asf.apache-netbeans-java/userdir
 
 When the environment variable `nbcode_userdir` (to e.g. `/tmp/foo`) is set when starting vscode or nbcode (npm run nbcode), the userdir will point to `/tmp/foo/userdir`.
 
