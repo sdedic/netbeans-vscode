@@ -23,10 +23,12 @@
     <description>Builds, tests, and runs the project org.netbeans.modules.java.lsp.server</description>
     <property name="lsp.build.dir" location="vscode/nbcode" />
     <property name="build.dir" location="build" />
-    <property name="nbplatform.default.netbeans.dest.dir" location="netbeans/nbbuild/netbeans" />
-    <property name="nbplatform.default.harness.dir" location="${nbplatform.default.netbeans.dest.dir}/harness" />
-    <property name="nbantext.jar" location="netbeans/nbbuild/build/nbantext.jar" />
     <property name="nb_all" location="netbeans" />
+    <property name="nb_all.build.dir" location="${nb_all}/nbbuild" />
+    <property name="nbplatform.default.netbeans.dest.dir" location="${nb_all.build.dir}/netbeans" />
+    <property name="nbplatform.default.harness.dir" location="${nbplatform.default.netbeans.dest.dir}/harness" />
+    <property name="nbantext.jar" location="${nb_all.build.dir}/build/nbantext.jar" />
+    <import file="${nb_all.build.dir}/default.xml"/>
     <condition property="cmd.suffix" value=".cmd" else="">
         <os family="windows"/>
     </condition>
@@ -62,15 +64,15 @@
         </autoupdate> -->
     </target>
     <target name="add-extra-modules" depends="build-lsp-server" if="extra.modules">
-        <ant dir="../../nbbuild" target="build-nbms" inheritall="false" inheritrefs="false">
+        <ant dir="${nb_all.build.dir}" target="build-nbms" inheritall="false" inheritrefs="false">
             <property name="cluster.config" value="basic"/>
         </ant>
-        <ant dir="../../nbbuild" target="generate-uc-catalog" inheritall="false" inheritrefs="false"/>
-        <makeurl file="../../nbbuild/nbms/updates.xml.gz" property="update.center.url"/>
+        <ant dir="${nb_all.build.dir}" target="generate-uc-catalog" inheritall="false" inheritrefs="false"/>
+        <makeurl file="${nb_all.build.dir}/nbms/updates.xml.gz" property="update.center.url"/>
         <autoupdate installdir="${lsp.build.dir}" updatecenter="${update.center.url}">
             <modules includes="${extra.modules}"/>
         </autoupdate>
-        <delete file="../../nbbuild/nbms/tasks.jar"/>
+        <delete file="${nb_all.build.dir}/nbms/tasks.jar"/>
     </target>
     <target name="-set-use-jdk-javac">
         <property name="test.use.jdk.javac" value="true" />
@@ -115,7 +117,7 @@
         <copy file="vscode/package.json" todir="${build.dir}/bundles/package" />
         <copy file="vscode/package-lock.json" todir="${build.dir}/bundles/package" />
 
-        <exec executable="mvn${cmd.suffix}" failonerror="true" dir="${nb_all}/nbbuild/misc/prepare-bundles">
+        <exec executable="mvn${cmd.suffix}" failonerror="true" dir="${nb_all.build.dir}/misc/prepare-bundles">
             <arg value="package" />
             <arg value="exec:java" />
             <arg value="-Dexec.mainClass=org.netbeans.prepare.bundles.PrepareBundles" />
@@ -146,12 +148,12 @@
         <taskdef name="createlicensesummary" classname="org.netbeans.nbbuild.extlibs.CreateLicenseSummary" classpath="${nbantext.jar}"/>
 
         <property name="config.javadoc.all" value="" />
-	<property file="${nb_all}/nbbuild/cluster.properties" />
+	<property file="${nb_all.build.dir}/cluster.properties" />
 	<taskdef name="resolvelist" classname="org.netbeans.nbbuild.ResolveList" classpath="${nbantext.jar}" />
         <resolvelist name="allmodules" path="modules.fullpath" dir="${nb_all}" list="${clusters.config.full.list}"/>
 
         <createlicensesummary licenseStub="${nb_all}/LICENSE"
-                              noticeStub="${nb_all}/nbbuild/notice-stub.txt"
+                              noticeStub="${nb_all.build.dir}/notice-stub.txt"
                               report="${build.dir}/createlicensesummary.xml"
                               nball="${nb_all}"
                               build="${build.dir}/vscode"
