@@ -22,7 +22,7 @@
 <project basedir="." default="netbeans" name="NBLS VSIX">
     <description>Builds, tests, and runs the project org.netbeans.modules.java.lsp.server</description>
     <property name="lsp.build.dir" location="vscode/nbcode" />
-    <property name="build.dir" location="build" />
+    <property name="vsc.build.dir" location="build" />
     <property name="nb_all" location="netbeans" />
     <property name="nb_all.build.dir" location="${nb_all}/nbbuild" />
     <property name="nbplatform.default.netbeans.dest.dir" location="${nb_all.build.dir}/netbeans" />
@@ -112,38 +112,38 @@
             <arg value="compile" />
         </exec>
 
-        <delete dir="${build.dir}/bundles" />
-        <mkdir dir="${build.dir}/bundles/package" />
-        <copy file="vscode/package.json" todir="${build.dir}/bundles/package" />
-        <copy file="vscode/package-lock.json" todir="${build.dir}/bundles/package" />
+        <delete dir="${vsc.build.dir}/bundles" />
+        <mkdir dir="${vsc.build.dir}/bundles/package" />
+        <copy file="vscode/package.json" todir="${vsc.build.dir}/bundles/package" />
+        <copy file="vscode/package-lock.json" todir="${vsc.build.dir}/bundles/package" />
 
         <exec executable="mvn${cmd.suffix}" failonerror="true" dir="${nb_all.build.dir}/misc/prepare-bundles">
             <arg value="package" />
             <arg value="exec:java" />
             <arg value="-Dexec.mainClass=org.netbeans.prepare.bundles.PrepareBundles" />
-            <arg value="-Dexec.args=${build.dir}/bundles ${nb_all}" />
+            <arg value="-Dexec.args=${vsc.build.dir}/bundles ${nb_all}" />
         </exec>
  
-        <mkdir dir="${build.dir}/vsce" />
-        <exec executable="npm${cmd.suffix}" failonerror="true" dir="${build.dir}/vsce">
+        <mkdir dir="${vsc.build.dir}/vsce" />
+        <exec executable="npm${cmd.suffix}" failonerror="true" dir="${vsc.build.dir}/vsce">
             <arg value="install" />
             <arg value="--save" />
             <arg value="@vscode/vsce@2.19.0" />
         </exec>
-        <exec executable="${build.dir}/vsce/node_modules/@vscode/vsce/vsce" failonerror="true" dir="${basedir}/vscode">
+        <exec executable="${vsc.build.dir}/vsce/node_modules/@vscode/vsce/vsce" failonerror="true" dir="${basedir}/vscode">
             <arg value="package" />
             <arg value="--baseImagesUrl" />
             <arg value="https://github.com/apache/netbeans/raw/${metabuild.hash}/java/java.lsp.server/vscode" />
             <arg value="--out" />
-            <arg value="${build.dir}/apache-netbeans-java-${vsix.version}.vsix" />
+            <arg value="${vsc.build.dir}/apache-netbeans-java-${vsix.version}.vsix" />
         </exec>
 
-        <delete dir="${build.dir}/vscode" />
-        <mkdir dir="${build.dir}/vscode" />
-        <delete dir="${build.dir}/vscode-mandatory" />
-        <mkdir dir="${build.dir}/vscode-mandatory/licenses" />
+        <delete dir="${vsc.build.dir}/vscode" />
+        <mkdir dir="${vsc.build.dir}/vscode" />
+        <delete dir="${vsc.build.dir}/vscode-mandatory" />
+        <mkdir dir="${vsc.build.dir}/vscode-mandatory/licenses" />
 
-        <unzip dest="${build.dir}/vscode" src="${build.dir}/apache-netbeans-java-${vsix.version}.vsix" />
+        <unzip dest="${vsc.build.dir}/vscode" src="${vsc.build.dir}/apache-netbeans-java-${vsix.version}.vsix" />
 
         <taskdef name="createlicensesummary" classname="org.netbeans.nbbuild.extlibs.CreateLicenseSummary" classpath="${nbantext.jar}"/>
 
@@ -154,20 +154,20 @@
 
         <createlicensesummary licenseStub="${nb_all}/LICENSE"
                               noticeStub="${nb_all.build.dir}/notice-stub.txt"
-                              report="${build.dir}/createlicensesummary.xml"
+                              report="${vsc.build.dir}/createlicensesummary.xml"
                               nball="${nb_all}"
-                              build="${build.dir}/vscode"
-                              license="${build.dir}/vscode-mandatory/LICENSE"
-                              licenseTargetDir="${build.dir}/vscode-mandatory/licenses"
-                              notice="${build.dir}/vscode-mandatory/NOTICE"
+                              build="${vsc.build.dir}/vscode"
+                              license="${vsc.build.dir}/vscode-mandatory/LICENSE"
+                              licenseTargetDir="${vsc.build.dir}/vscode-mandatory/licenses"
+                              notice="${vsc.build.dir}/vscode-mandatory/NOTICE"
                               binary="true"
                               excludes="${nb-extra-files}"
-                              extraExternalDirectory="${build.dir}/bundles/bundles"
-                              extraLicenseDirectory="${build.dir}/bundles/licenses"
+                              extraExternalDirectory="${vsc.build.dir}/bundles/bundles"
+                              extraLicenseDirectory="${vsc.build.dir}/bundles/licenses"
                               includeAllFiles="true"
         />
 
-        <zip destfile="${build.dir}/apache-netbeans-java-${vsix.version}.vsix" basedir="${build.dir}/vscode-mandatory/" update="true" />
+        <zip destfile="${vsc.build.dir}/apache-netbeans-java-${vsix.version}.vsix" basedir="${vsc.build.dir}/vscode-mandatory/" update="true" />
     </target>
     <target name="test-lsp-server" description="Tests the LSP server behavior">
         <ant dir="nbcode" target="test" inheritall="false" inheritrefs="false" />
