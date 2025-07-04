@@ -186,7 +186,7 @@
         </exec>
     </target>
         <target name="build-netbeans">
-        <ant dir="netbeans" inheritAll="false" inheritRefs="false" useNativeBasedir="true"/>
+        <ant dir="netbeans" inheritAll="true" inheritRefs="false" useNativeBasedir="true"/>
     </target>
 
     <target name="clean-netbeans">
