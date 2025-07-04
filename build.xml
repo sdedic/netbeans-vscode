@@ -150,7 +150,7 @@
         <property name="config.javadoc.all" value="" />
 	<property file="${nb_all.build.dir}/cluster.properties" />
 	<taskdef name="resolvelist" classname="org.netbeans.nbbuild.ResolveList" classpath="${nbantext.jar}" />
-        <resolvelist name="allmodules" path="modules.fullpath" dir="${nb_all}" list="${clusters.config.full.list}"/>
+        <resolvelist name="allmodules" path="modules.fullpath" dir="${nb_all}" list="${clusters.config.release.list}"/>
 
         <createlicensesummary licenseStub="${nb_all}/LICENSE"
                               noticeStub="${nb_all.build.dir}/notice-stub.txt"
