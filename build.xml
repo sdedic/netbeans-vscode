@@ -173,6 +173,31 @@
         <ant dir="nbcode" target="test" inheritall="false" inheritrefs="false" />
     </target>
 
+    <target name="int-default" description="Bootstrap netbeans">
+        <ant dir="${nb_all.build.dir}" target="bootstrap" inheritall="false" inheritrefs="false" />
+    </target>
+    <target name="build-source-config" depends="int-default, set-buildnumber" description="Build sources" >
+        <ant dir="${nb_all.build.dir}" target="build-source-config" inheritall="true" inheritrefs="false" />
+        <mkdir dir="${vsc.build.dir}/sources/netbeans" />
+        <echo message="Buildnumber set to ${buildnumber}"/>
+        <echo message="Cluster set to ${cluster.config}-src-${buildnum}.zip"/>
+        <zip destfile="${vsc.build.dir}/${cluster.config}-src-${buildnum}.zip" >
+            <fileset dir="." >
+                <exclude name="netbeans/"/>
+                <exclude name="build/"/>
+                <exclude name="vscode/nbcode/"/>
+                <exclude name="nbcode/build/"/>
+                <exclude name="nbcode/dist/"/>
+                <exclude name="nbcode/integration.java/build/"/>
+                <exclude name="nbcode/integration/build/"/>
+                <exclude name="vscode/node_modules/"/>
+                <exclude name="vscode/out/"/>
+            </fileset>
+            <zipfileset src="${nb_all.build.dir}/build/${cluster.config}-src-${buildnum}.zip" prefix="netbeans"/>
+        </zip>
+
+    </target>
+
     <target name="test-vscode-ext" depends="test-lsp-server" description="Tests the Visual Studio Code extension built by 'build-vscode-ext' target.">
         <exec executable="npm${cmd.suffix}" failonerror="true" dir="vscode">
             <arg value="--allow-same-version"/>
