@@ -19,7 +19,7 @@
     under the License.
 
 -->
-<project basedir="." default="netbeans" name="NBLS VSIX">
+<project basedir="." default="build-vscode-ext" name="NBLS VSIX">
     <description>Builds, tests, and runs the project org.netbeans.modules.java.lsp.server</description>
     <property name="lsp.build.dir" location="vscode/nbcode" />
     <property name="vsc.build.dir" location="build" />
