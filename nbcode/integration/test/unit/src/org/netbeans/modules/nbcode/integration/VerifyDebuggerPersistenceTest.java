@@ -19,15 +19,24 @@
 package org.netbeans.modules.nbcode.integration;
 
 import org.netbeans.api.debugger.Properties;
+import org.netbeans.junit.NbModuleSuite;
 import org.netbeans.junit.NbTestCase;
 
 /**
  * Verify that debugger does not store persistently stuff that is set through VSCode client.
  */
-public class VerifyDebuggerPersistence extends NbTestCase {
+public class VerifyDebuggerPersistenceTest extends NbTestCase {
 
-    public VerifyDebuggerPersistence(String name) {
+    public VerifyDebuggerPersistenceTest(String name) {
         super(name);
+    }
+
+    public static junit.framework.Test suite() {
+        return NbModuleSuite.createConfiguration(VerifyDebuggerPersistenceTest.class).
+            gui(false).
+            enableModules(".*").
+            honorAutoloadEager(true).
+            suite();
     }
 
     public void testBreakpointsPersistenceSetting() {
