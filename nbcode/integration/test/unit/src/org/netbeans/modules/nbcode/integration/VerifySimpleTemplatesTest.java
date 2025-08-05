@@ -44,17 +44,11 @@ public class VerifySimpleTemplatesTest extends NbTestCase {
     }
 
     public static Test suite() {
-        String v = System.getProperty("java.version");
-        if (v == null || !v.startsWith("1.8")) {
-            return NbModuleSuite.emptyConfiguration().suite();
-        }
-
-        return NbModuleSuite.emptyConfiguration().
+        return NbModuleSuite.createConfiguration(VerifySimpleTemplatesTest.class).
             clusters("(extide|java).*").
             enableModules(".*", ".*").
             honorAutoloadEager(true).
             failOnException(Level.INFO).
-            addTest(VerifySimpleTemplatesTest.class).
             suite();
     }
 
