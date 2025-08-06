@@ -32,7 +32,7 @@ github:
     projects: false
     discussions: true
   dependabot_alerts: false
-  dependabot_updates: true
+  dependabot_updates: false
   enabled_merge_buttons:
     squash: false
     merge: true
