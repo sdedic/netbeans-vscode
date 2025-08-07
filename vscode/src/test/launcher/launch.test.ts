@@ -41,7 +41,7 @@ Mocha.afterEach(() => {
     myExtension.clearDebugConsoleListeners(); 
 })
 
-const MAVEN_COMMAND_REGEX = /\/netbeans\/java\/java\.lsp\.server\/vscode\/nbcode\/java\/maven\/bin\/mvn/;
+const MAVEN_COMMAND_REGEX = /\/vscode\/nbcode\/java\/maven\/bin\/mvn/;
 const MAVEN_PLUGIN_RUN_REGEX = /io\.micronaut\.maven:micronaut-maven-plugin:run/;
 
 function isMavenCommand(input: string) {
