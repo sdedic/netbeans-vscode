@@ -18,7 +18,7 @@
 
 github:
   description: "Apache NetBeans for VS Code"
-  homepage: https://netbeans.apache.org
+  homepage: "https://marketplace.visualstudio.com/items?itemName=ASF.apache-netbeans-java"
   labels:
     - vscode
     - java
