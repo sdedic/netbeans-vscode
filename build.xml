@@ -163,7 +163,7 @@
         <ant dir="nbcode" target="test" inheritall="false" inheritrefs="false" />
     </target>
 
-    <target name="int-default" description="Bootstrap netbeans">
+    <target name="int-default">
         <ant dir="${nb_all.build.dir}" target="bootstrap" inheritall="false" inheritrefs="false" />
         <taskdef name="gitbranchhash" classname="org.netbeans.nbbuild.GitBranchHash" classpath="${nbantext.jar}" />
         <gitbranchhash file="." branchproperty="metabuild.branch" hashproperty="metabuild.hash" />
@@ -199,12 +199,15 @@
             <arg value="apisupport" />
         </exec>
     </target>
-        <target name="build-netbeans">
+
+    <target name="build-netbeans" description="Build netbeans">
         <ant dir="netbeans" inheritAll="true" inheritRefs="false" useNativeBasedir="true"/>
     </target>
 
-    <target name="clean-netbeans">
+    <target name="clean-netbeans" description="Clean netbeans">
         <ant dir="netbeans" target="clean" inheritAll="false" inheritRefs="false" useNativeBasedir="true"/>
     </target>
+
+    <target name="clean" depends="clean-vscode-ext,clean-netbeans" description="Clean netbeans and all VSCode related artifacts"/>
 
 </project>
