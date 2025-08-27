@@ -5,7 +5,7 @@ See [Documentation](vscode/README.md) on VSNetBeans features.
 
 ## Requirements
 * JDK 17 or higher to build and run Java LSP
-* Node.js 18.20 or higher and npm installed to build VSIX
+* Node.js 20.18.1 or higher and npm installed to build VSIX
 
 ## Build
 Apache NetBeans Language Server for VS Code consists of source code for VS Code integration in this repository and NetBeans IDE sources linked as [netbeans submodule](netbeans/) from main [NetBeans Git repo](https://github.com/apache/netbeans/).
