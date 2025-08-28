@@ -946,7 +946,7 @@ export function activate(context: ExtensionContext): VSNetBeansAPI {
             debugConfig['testRun'] = testRun;
 
             const workspaceFolder = vscode.workspace.getWorkspaceFolder(docUri);
-            if (project || testRun) {
+            if (project) {
                 debugConfig['projectFile'] = docUri.toString();
                 debugConfig['project'] = true;
             } else {
@@ -992,6 +992,12 @@ export function activate(context: ExtensionContext): VSNetBeansAPI {
     }));
     context.subscriptions.push(commands.registerCommand(COMMAND_PREFIX + '.debug.single', async (uri, methodName?, launchConfiguration?, nestedClass?) => {
         await runDebug(false, false, uri, methodName, nestedClass, launchConfiguration);
+    }));
+    context.subscriptions.push(commands.registerCommand(COMMAND_PREFIX + '.run.test.single', async (uri, methodName?, launchConfiguration?, nestedClass?) => {
+        await runDebug(true, true, uri, methodName, nestedClass, launchConfiguration);
+    }));
+    context.subscriptions.push(commands.registerCommand(COMMAND_PREFIX + '.debug.test.single', async (uri, methodName?, launchConfiguration?, nestedClass?) => {
+        await runDebug(false, true, uri, methodName, nestedClass, launchConfiguration);
     }));
     context.subscriptions.push(commands.registerCommand(COMMAND_PREFIX + '.project.run', async (node, launchConfiguration?) => {
         return runDebug(true, false, contextUri(node)?.toString() || '',  undefined, undefined, launchConfiguration, true);
