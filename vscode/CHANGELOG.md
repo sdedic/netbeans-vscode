@@ -20,6 +20,10 @@
     under the License.
 
 -->
+## Version 27.0.1
+* Support Gradle 9 and several bug fixes for Gradle
+* 1st release of Apache NetBeans for VS Code done from `netbeans-vscode` repository
+
 ## Version 24.9.9
 * Version 24.9.9 is VSNetBeans technology preview of upcoming VSNetBeans 25.0
 * New terminal is opened in VSCode Output panel for every LSP IO operation, like build...
