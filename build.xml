@@ -123,7 +123,7 @@
         <exec executable="${vsc.build.dir}/vsce/node_modules/@vscode/vsce/vsce" failonerror="true" dir="${basedir}/vscode">
             <arg value="package" />
             <arg value="--baseImagesUrl" />
-            <arg value="https://github.com/apache/netbeans/raw/${metabuild.hash}/java/java.lsp.server/vscode" />
+            <arg value="https://github.com/apache/netbeans-vscode/raw/${metabuild.hash}/vscode" />
             <arg value="--out" />
             <arg value="${vsc.build.dir}/apache-netbeans-java-${vsix.version}.vsix" />
         </exec>
